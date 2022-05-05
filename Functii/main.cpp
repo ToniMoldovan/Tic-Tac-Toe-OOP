@@ -26,6 +26,7 @@ typedef struct Joc
 
 /*Operatiuni tabla*/
 void afisareTabla(Joc obJoc) {
+	cout << endl;
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -47,7 +48,7 @@ Joc initializareJocNou() {
 	cout << "Introdu numele primului jucator: "; cin >> jocNou.j1.nume;
 	cout << "Introdu numele celui de-al doilea jucator: "; cin >> jocNou.j2.nume;
 
-	cout << "Noul joc a fost initializat cu succes." << endl << endl;
+	cout << "\n[INFO]: Noul joc a fost initializat cu succes." << endl << endl;
 
 	return jocNou;
 }
@@ -59,7 +60,6 @@ Joc alegereJucatorRandom(Joc obJoc) {
 	srand(time(NULL));
 
 	int numarGenerat = rand() % 2 + 1;
-	cout << "Numar generat: " << numarGenerat << endl;
 
 	if (numarGenerat == 1) {
 		obJoc.j1.semn = 'X';
@@ -67,6 +67,10 @@ Joc alegereJucatorRandom(Joc obJoc) {
 
 		obJoc.j2.semn = '0';
 		obJoc.j2.tura = false;
+
+		cout << obJoc.j1.nume << " va juca cu X." << endl;
+		cout << obJoc.j2.nume << " va juca cu 0." << endl;
+
 	}
 	else {
 		obJoc.j2.semn = 'X';
@@ -74,6 +78,9 @@ Joc alegereJucatorRandom(Joc obJoc) {
 
 		obJoc.j1.semn = '0';
 		obJoc.j1.tura = false;
+
+		cout << obJoc.j2.nume << " va juca cu X." << endl;
+		cout << obJoc.j1.nume << " va juca cu 0." << endl;
 	}
 
 	return obJoc;
@@ -218,11 +225,11 @@ Joc plasareMutare(Joc obJoc) {
 	unsigned int pozitieAleasa;
 	if (verificareTuraJucator(obJoc))
 	{
-		cout << obJoc.j1.nume << " ,alege o pozitie disponibila: "; cin >> pozitieAleasa;
+		cout << obJoc.j1.nume << ", alege o pozitie disponibila: "; cin >> pozitieAleasa;
 	}
 	else
 	{
-		cout << obJoc.j2.nume << " ,alege o pozitie disponibila: "; cin >> pozitieAleasa;
+		cout << obJoc.j2.nume << ", alege o pozitie disponibila: "; cin >> pozitieAleasa;
 	}
 
 	cout << "Se verifica pozitia..." << endl;
@@ -346,6 +353,8 @@ void startJoc(Joc obJoc) {
 
 		jocTerminat = verificareSfarsitJoc(obJoc);
 	}
+
+	afisareTabla(obJoc);
 
 	cout << "Sfarsit joc.\n";
 
